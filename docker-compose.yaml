@@ -1,0 +1,34 @@
+version: "2"
+
+services:
+  poke_db:
+    image: postgres:13.0
+    environment: &poke-common-env
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "postgres"
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - ./poke_api/config/poke-ddl.sql:/docker-entrypoint-initdb.d/poke-ddl.sql
+      - poke_db:/var/lib/postgresql/data
+
+  poke_api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      <<: *poke-common-env
+      POSTGRES_HOST: "poke_db"
+      POSTGRES_PORT: "5432"
+    image: poke_api
+    depends_on:
+      - poke_db
+    ports:
+      - 8000:8000
+    working_dir: /root/poke_api
+    command: bash -c "uvicorn --host 0.0.0.0 --port 8000 poke_api.app:app --reload"
+
+volumes:
+  poke_db: {}

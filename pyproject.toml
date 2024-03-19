@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "poke-api"
+version = "0.1.0"
+description = "Simple api to get pokemon information"
+authors = ["bayuadiwibowo <bayuad65@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+PyYAML = "^6.0"
+python-json-logger = "^2.0.2"
+pydantic = "^1.9.0"
+fastapi = "^0.75.0"
+uvicorn = "^0.16.0"
+aiohttp = "^3.8.1"
+asyncpg = "^0.26.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
