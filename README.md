@@ -14,3 +14,19 @@ docker compose up -d
 ```sh
 docker compose down
 ```
+
+# API Contract
+## Get Pokemon Ability
+```sh
+curl --location 'localhost:8000/api/v1/ability' \
+--header 'Content-Type: application/json' \
+--data '{
+   "loan_id": "9594641568",
+   "user_id": "5199434",
+   "pokemon_ability_id": "150"
+}'
+```
+## Get API Health Status
+```sh
+curl --location 'localhost:8000/health'
+```
